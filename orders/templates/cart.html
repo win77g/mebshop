@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<!-- breadcrumb start-->
+  <section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <i><h2>Корзина</h2></i>
+              <i><p><a href="/">Главная</a><span>/</span>Корзина</p></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb start-->
+  {% if not products_in_basket %}
+  <section class="cart_area padding_top">
+      <div class="container ">
+
+
+       <h3>Корзина пустая...!!!</h3>
+         <div class="buttons pull-right">
+           <a href="/"><input type="submit" class="btn btn-primary" value="Вернуться в магазин" /></a>
+         </div>
+
+
+  </div>
+  <section>
+
+                       {% else %}
+<section class="cart_area padding_top">
+    <div class="container">
+      <div class="cart_inner">
+        <form class="form-horizontal" method="post">{% csrf_token %}
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Продукт</th>
+                <th scope="col">Кол.во</th>
+                <th scope="col">Цена</th>
+                <th scope="col">Сумма</th>
+              </tr>
+            </thead>
+            <tbody>
+{% for product in products_in_basket %}
+              <tr>
+                <td>
+                  <div class="media">
+                    <div class="d-flex">
+                      <img src="/media/{{product.image}}/" width="150" height="150" alt="" />
+                    </div>
+                    <div class="media-body">
+                      <p>{{product.product}}</p>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">
+                  <div class="product_count">
+                    <input  type="number" id="product-in-basket-nmb"  value="{{ product.nmb }}" min="1"
+                                     name="product_in_basket_{{ product.product.id }}">
+                  </div>
+                </td>
+
+                <td class="product-price">
+                  <!-- <span class="product-price"> -->
+                  <h5>{{ product.price_per_item }}</h5>
+                  <!-- </span> -->
+                </td>
+
+                <td class="tot">
+                  <h5>{{ product.total_price }}</h5>
+                </td>
+                <td>
+                  <a class="delete-item" name="{{product.name }}" href="/orders/delete_item_in_basket/{{ product.product_id }}">X</a>
+                </td>
+              </tr>
+{% endfor %}
+
+              <tr>
+                <td></td>
+                <td></td>
+                <td>
+                  <h5>Итого к оплате</h5>
+                </td>
+                <td class="total_order_amount">
+                  <h5>{{ cart_total_price }}</h5>
+                </td>
+                <tr class="bottom_button">
+                  <td>
+                    <!-- <a class="btn_1" href="#">Обновить корзину</a> -->
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="cupon_text float-right">
+                      <input  type="submit" class="btn btn-primary" value="Обновить корзину" />
+                    </div>
+                  </td>
+                </tr>
+
+
+            </tbody>
+          </table>
+        </form>
+        <div class="checkout_btn_inner float-right">
+          <a class="btn_1" href="/">Вернуться в магазин</a>
+          <a class="btn_1 checkout_btn_1" href="/orders/checkout/" >Перейти к оплате</a>
+        </div>
+      </div>
+      </div>
+  </section>
+  {% endif %}
+  {% endblock %}

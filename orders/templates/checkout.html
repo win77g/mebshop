@@ -1,0 +1,154 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% load crispy_forms_tags %}
+<section class="breadcrumb breadcrumb_bg">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              <i><h2>Оформление заказа</h2></i>
+              <i><p><a href="/">Главная</a> <span>/</span> Оформление заказа</p></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- breadcrumb start-->
+
+  <!--================Checkout Area =================-->
+  <section class="checkout_area padding_top" style="margin-left:15px;margin-right:15px;">
+    <div class="container">
+
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>Billing Details</h3>
+            <form class="row contact_form"  method="post" >{% csrf_token %}
+              <div class="col-md-6 form-group p_star">
+                {{ form.surname|as_crispy_field }}
+              </div>
+              <div class="col-md-6 form-group p_star">
+                {{ form.name|as_crispy_field }}
+              </div>
+              <div class="col-md-6 form-group p_star">
+                {{ form.phone|as_crispy_field }}
+              </div>
+              <div class="col-md-6 form-group p_star">
+                {{ form.email|as_crispy_field }}
+              </div>
+              <div class="col-md-6 form-group p_star">
+                {{ form.city|as_crispy_field }}
+              </div>
+              <div class="col-md-6 form-group p_star">
+                {{ form.street|as_crispy_field }}
+              </div>
+              <div class="col-md-12 form-group p_star">
+                {{ form.text|as_crispy_field }}
+              </div>
+
+
+<!--              <div class="col-md-6 form-group p_star">-->
+<!--                -->
+<!--               &lt;!&ndash; <label>Фамилия</label> &ndash;&gt;-->
+<!--                <span class="form-error">{{ form.name.errors }}</span>-->
+
+<!--                 <input type="text" name="{{ form.surname.html_name }}" class="form-control"-->
+<!--                                    value = "{{ request.POST.surname }}" placeholder="Фамилия">-->
+<!--&lt;!&ndash;                                    <span class="placeholder" data-placeholder="Фамилия"></span>&ndash;&gt;-->
+
+<!--              </div>-->
+<!--              <div class="col-md-6 form-group p_star">-->
+
+<!--                 <span class="form-error">{{ form.name.errors }}</span>-->
+<!--                   {% if user.is_authenticated %}-->
+<!--                  <input type="text" name="{{ form.name.html_name }}" class="form-control"-->
+<!--                                     value = "{{ request.POST.name }}" placeholder="Имя">-->
+<!--&lt;!&ndash;                                     <span class="placeholder" data-placeholder="Имя"></span>&ndash;&gt;-->
+<!--                     {% else %}-->
+<!--                  <input type="text" name="{{ form.name.html_name }}" class="form-control"-->
+<!--                                     value = "{{ request.POST.name }}">-->
+<!--&lt;!&ndash;                                     <span class="placeholder" data-placeholder="Имя"></span>&ndash;&gt;-->
+<!--                     {% endif %}-->
+<!--              </div>-->
+
+<!--              <div class="col-md-6 form-group p_star">-->
+
+<!--                  <span class="form-error">{{ form.phone.errors }}</span>-->
+<!--                    <input type="text" name="{{ form.phone.html_name }}" class="form-control"-->
+<!--                                        value = "{{ request.POST.phone }}" placeholder="Телефон">-->
+<!--&lt;!&ndash;                  <span class="placeholder" data-placeholder="Телефон"></span>&ndash;&gt;-->
+<!--              </div>-->
+<!--              <div class="col-md-6 form-group p_star">-->
+<!--                <span class="form-error">{{ form.email.errors }}</span>-->
+<!--                  <input type="text" name="{{ form.email.html_name }}" class="form-control"-->
+<!--                      value = "{{ request.POST.email }}" placeholder="Email Address">-->
+<!--&lt;!&ndash;                <span class="placeholder" data-placeholder="Email Address"></span>&ndash;&gt;-->
+<!--              </div>-->
+
+
+
+<!--&lt;!&ndash;              <div class="col-md-12 form-group">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="creat_account">&ndash;&gt;-->
+<!--&lt;!&ndash;                  <h3>Адресс доставки</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;              </div>&ndash;&gt;-->
+<!--                <div class="col-md-12 form-group p_star">-->
+<!--                <input type="text" name="{{ form.city.html_name }}" class="form-control"-->
+<!--                      value = "{{ request.POST.city }}" placeholder="Город" >-->
+
+<!--                  </div>-->
+<!--                  <div class="col-md-12 form-group p_star">-->
+<!--                <input type="text" name="{{ form.street.html_name }}" class="form-control"-->
+<!--                      value = "{{ request.POST.street }}" placeholder="Улица / номер дома" >-->
+<!--                  </div>-->
+<!--                <div class="col-md-12 form-group p_star">-->
+<!--                <textarea type="text" name="{{ form.text.html_name }}" class="form-control"-->
+<!--                      value = "{{ request.POST.text }}" placeholder="Дополнение к заказу" ></textarea>-->
+<!--                  </div>-->
+
+              <div class="buttons pull-right">
+                <input  type="submit" class="btn btn-primary" value="Подтвердить/Оформить заказ" />
+              </div>
+            </form>
+          </div>
+          <div class="col-lg-4">
+
+
+            <div class="order_box">
+              <h2>Ваш заказ {{ item.id }}</h2>
+
+              <ul class="list">
+                <li>
+                  <a href="#">Продукт
+                    <span>Цена</span>
+                  </a>
+                </li>
+                {% for item in products_in_basket %}
+                <li>
+                  <a href="#">{{item.product}}
+                    <span class="middle">{{item.nmb}} шт.</span>
+                    <span class="last">{{item.price_per_item}} грн.</span>
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">К оплате
+                    <span>{{total_price}} грн.</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================End Checkout Area =================-->
+{% endblock %}

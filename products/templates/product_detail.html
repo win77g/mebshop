@@ -1,0 +1,255 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+<!-- breadcrumb start-->
+<style>
+.green{
+  background-color:#6fb936;
+}
+        .thumb{
+            margin-bottom: 30px;
+        }
+
+        .page-top{
+            margin-top:0px;
+        }
+
+
+img.zoom {
+    width: 100%;
+    height: 200px;
+    border-radius:5px;
+    object-fit:cover;
+    -webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+}
+
+
+.transition {
+    -webkit-transform: scale(1.2);
+    -moz-transform: scale(1.2);
+    -o-transform: scale(1.2);
+    transform: scale(1.2);
+}
+    .modal-header {
+
+     border-bottom: none;
+}
+    .modal-title {
+        color:#000;
+    }
+    .modal-footer{
+      display:none;
+    }
+
+
+</style>
+
+
+
+  <section class="breadcrumb breadcrumb_bg"><!---->
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="breadcrumb_iner">
+            <div class="breadcrumb_iner_item">
+              {% for item in product %}
+              <h2>{{item.name}}</h2>
+              <!-- {% endfor %} -->
+                {{item}}
+              <p><a href="/">Главная</a><span>/</span>
+                <!-- {% for item in product %} -->
+                <a href="/category/{{slug}}/">{{item.categ}}</a>
+                <!-- {% endfor %} -->
+                <span>/</span>
+                <!-- {% for item in product %} -->
+                {{item.name}}
+
+                 </p>
+                 {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <hr class="light_1"/>
+  </section>
+  <!-- breadcrumb start-->
+  <!--================End Home Banner Area =================-->
+
+  <!--================Single Product Area =================-->
+  <div class="product_image_area section_padding">
+    <div class="container">
+      <div class="row s_product_inner justify-content-between" style="margin-left:15px;margin-right:15px;">
+        <div class="col-lg-7 col-xl-7">
+          <div class="product_slider_img">
+            <div id="vertical">
+              {% for item in product %}
+              <div data-thumb="/media/{{item.image}}">
+                <img src="/media/{{item.image}}" height="600" width="1000"/>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        {% for item in product %}
+        <div class="col-lg-5 col-xl-4">
+          <div class="s_product_text">
+<!--            <h5>previous <span>|</span> next</h5>-->
+
+            <h3>{{item.name}}</h3>
+            <h2>{{item.price}} грн.</h2>
+
+            <ul class="list">
+              <li>
+                <a class="active" href="#">
+                  <span>Категория</span> : {{item.categ}}</a>
+              </li>
+
+              <li>
+                <a href="#"> <span>Наличие</span> : на складе</a>
+              </li>
+            </ul>
+
+            <p>
+            {{ item.description_short|safe }}
+            </p>
+            <form id="form_buing_product" action="/orders/basket_adding/">{% csrf_token %}
+            <div class="card_area d-flex justify-content-between align-items-center">
+              <div class="product_count">
+<!--                <span class="inumber-decrement"> <i class="ti-minus"></i></span>-->
+                <input type="number"  value="1" min="0" max="10" id="namber">
+<!--                <span class="number-increment"> <i class="ti-plus"></i></span>-->
+              </div>
+              <button type="submit" class="btn_3"
+                                                {% for item in product %}
+                                                data-product_id = "{{ item.id }}"
+                                                data-name = "{{item.name}}"
+                                                data-price = "{{item.price}}"
+                                                data-image = "{{item.image}}"
+                                                id="submit_btn"
+                                                {% endfor %}
+              >В корзину</button>
+              <a href="#" class="like_us">  </a>
+            </div>
+
+            </form>
+          </div>
+        </div>
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+  <!--================End Single Product Area =================-->
+<!--================ Product Gallery=================-->
+
+<div class="container page-top" style="margin-left:15px;margin-right:15px;">
+<!--         <div class="row">-->
+<!--            <div class="col-lg-12 text-center my-2">-->
+<!--               <h4 class="border-bottom border-dark p-2"></h4>-->
+<!--            </div>-->
+<!--         </div>-->
+       <div class="row">
+<!--           {{ imagegallery }}-->
+           {% for item in gallery %}
+
+            <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+<!--                <a href="https://images.pexels.com/photos/62307/air-bubbles-diving-underwater-blow-62307.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" class="fancybox" rel="ligthbox">-->
+                    <a href="/media/{{item.image}}" class="fancybox" rel="ligthbox">
+                    <img  src="/media/{{item.image}}" class="zoom img-fluid "  alt="">
+<!--                  {{item.slug}}-->
+                </a>
+            </div>
+
+          {% endfor %}
+         </div>
+       </div>
+
+<!--================ END Product Gallery=================-->
+  <!--================Product Description Area =================-->
+  <section class="product_description_area" style="margin-left:15px;margin-right:15px;">
+    <div class="container">
+      <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+            aria-selected="true">Описание</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+            aria-selected="false">Характеристика</a>
+        </li>
+      </ul>
+      {% for item in product %}
+      <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+          <p>
+         {{ item.description|safe }}
+          </p>
+
+        </div>
+        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+              {% for item in property %}
+                <tr>
+                  <td>
+                    <h5>{{item.category_property_id}}</h5>
+                  </td>
+                  <td>
+                    <h5>{{item.value}}</h5>
+                  </td>
+                </tr>
+              {% endfor %}
+<!--              <tr>-->
+<!--                 <td>-->
+<!--                    <h5>Глубина</h5>-->
+<!--                  </td>-->
+<!--                 <td>-->
+<!--                   <h5>{{item.deep}}</h5>-->
+<!--                 </td>-->
+<!--               </tr>-->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+  <!--================End Product Description Area =================-->
+
+  <!-- product_list part start-->
+     <!-- product_list part start-->
+    <section class="product_list best_seller section_padding" style="margin-left:15px;margin-right:15px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section_tittle text-center">
+                        <h2>Лучшая продажа <span></span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-12">
+                    <div class="best_product_slider owl-carousel">
+                        {% for item in slider_top %}
+                        <div class="single_product_item">
+                            <a href="/product/{{ item.slug }}"><img src="/media/{{ item.image }}" width="200" height="250" alt=""></a>
+                            <div class="single_product_text">
+                                <h4>{{ item.name }}</h4>
+                                <h3>{{ item.price }}</h3>
+                                <a href="/product/{{ item.slug }}"><h3>Перейти</h3></a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

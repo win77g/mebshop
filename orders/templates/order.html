@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<section class="confirmation_part padding_top " style="margin-left:15px;margin-right:15px;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="confirmation_tittle">
+            <span>Спасибо за заказ!!!.Ждите звоночек от Антошки..</span>
+          </div>
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+
+            <h4>Ваш счёт:</h4>
+            {% for item in item %}
+            <ul>
+
+              <li>
+                <p>Счёт №</p><span>: {{ item.id}}</span>
+              </li>
+              <li>
+                <p>дата</p><span>: {{ item.created}}</span>
+              </li>
+              <li>
+                <p>к оплате</p><span>: {{item.total_price}} грн.</span>
+              </li>
+              <li>
+                <p>способ опаты</p><span>: наличман(в натуре :))</span>
+              </li>
+            </ul>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+            <h4>Адрес доставки</h4>
+            {% for item in item %}
+            <ul>
+              <li>
+                <p>город</p><span>: {{item.customer_city}}</span>
+              </li>
+              <li>
+                <p>Улица</p><span>: {{item.customer_street}}</span>
+              </li>
+            </ul>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="order_details_iner">
+            <h3>Детали счёта</h3>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="2">Продукт</th>
+                  <th scope="col">Кол.во</th>
+                  <th scope="col">Цена</th>
+                  <th scope="col">Сумма</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for item in productinorder %}
+                <tr>
+                  <th colspan="2"><span>{{ item.product }}</span></th>
+                  <th>{{ item.nmb }}</th>
+                  <th>{{ item.price_per_item }} грн.</th>
+                  <th> <span>{{ item.total_price }} грн.</span></th>
+                </tr>
+              {% endfor %}
+
+                <tr>
+                  <th colspan="3">Итого</th>
+                  <th></th>
+                  {% for item in item %}
+                  <th> <span>{{ item.total_price }} грн.</span></th>
+                  {% endfor %}
+                </tr>
+<!--                <tr>-->
+<!--                  <th colspan="3">shipping</th>-->
+<!--                  <th></th>-->
+<!--                  <th><span>flat rate: $50.00</span></th>-->
+<!--                </tr>-->
+              </tbody>
+              <tfoot>
+                <tr>
+                  <th scope="col" colspan="3">К оплате</th>
+                  <th></th>
+                   {% for item in item %}
+                  <th scope="col"> <span>{{ item.total_price }} грн.</span></th>
+                  {% endfor %}
+
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--================ confirmation part end =================-->
+{% endblock %}

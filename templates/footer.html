@@ -1,0 +1,104 @@
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+<footer class="footer_part">
+    <div class="container">
+        <div class="row justify-content-around">
+            <div class="col-sm-6 col-lg-2">
+                <div class="revealator-zoomin revealator-once">
+                <div class="single_footer_part">
+                    <h4>Наш офис</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Наше руководство</a></li>
+                        <li><a href="#">Программисты</a></li>
+                        <li><a href="#">Продавцы</a></li>
+                        <li><a href="#">Наш девиз</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="revealator-zoomin revealator-delay2 revealator-once">
+                <div class="single_footer_part">
+                    <h4>Админка</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Сертификаты</a></li>
+                        <li><a href="#">Контроль качества</a></li>
+                        <li><a href="#">Политика возврата</a></li>
+                        <li><a href="#">Гарантия</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="revealator-zoomin revealator-delay4 revealator-once">
+                <div class="single_footer_part">
+                    <h4>Материалы</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Дерево</a></li>
+                        <li><a href="#">Фурнитура</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-2">
+                <div class="revealator-zoomin revealator-delay6 revealator-once">
+                <div class="single_footer_part">
+                    <h4>Сотрудничество</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#">Реклама</a></li>
+                        <li><a href="#">Темпы реализации</a></li>
+                        <li><a href="#">Дистрибуция</a></li>
+                        <li><a href="#">Наши партнеры</a></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                <div class="revealator-zoomin revealator-delay8 revealator-once">
+                <div class="single_footer_part">
+                    <h4>Новостная рассылка</h4>
+                    <p>
+                    </p>
+                    <div id="mc_embed_signup">
+                         <form  id="subscribe-email" class="subscribe_form relative mail_part"
+                        onsubmit="document.querySelector('.info.container').textContent = 'Успешно отправлено.';"
+
+                        >{% csrf_token %}
+
+                            <input type="email"  name="email" id="email" placeholder="Email Address" required>
+
+                            <button type="submit" name="submit" id="newsletter-submit"
+                                class="email_icon newsletter-submit button-contactForm">Подписаться</button>
+                            <div class="info container"></div>
+                        </form>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="copyright_part">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="copyright_text">
+                        <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></P>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer_icon social_icon">
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

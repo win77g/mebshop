@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+{% load extras %}
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <i><h2>{{categorys.name}}</h2></i>
+                            <i><p><a href="/">Главная</a><span>/</span>{{q}}</p></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+
+<!--                        <aside class="left_widgets p_filter_widgets price_rangs_aside">-->
+<!--                            <div class="l_w_title">-->
+<!--                                <h3>Фильтр цены</h3>-->
+<!--                            </div>-->
+<!--                            <div class="widgets_inner">-->
+<!--                                <form action="/category/filter/" method="post" id="fillterPrice"> {% csrf_token %}-->
+<!--                                <div class="range_item">-->
+<!--                                     <div id="slider-range" ></div>-->
+<!--                                    <input type="text" class="js-range-slider"  />-->
+<!--                                    <div class="d-flex">-->
+<!--                                        <div class="price_text">-->
+<!--                                            <p>Цена :</p>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="price_value d-flex justify-content-center">-->
+
+<!--                                                <input type="text" class="js-input-from"  value="{{min_p|floatformat}}" />-->
+<!--                                                   <span>до</span>-->
+<!--                                                <input type="text" class="js-input-to"  value="{{max_p|floatformat}}" />-->
+
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                  </form>-->
+<!--                            </div>-->
+<!--                        </aside>-->
+<!--                        <form action="/category/filter/" id="fillterSubCategory" method="post" >{% csrf_token %}-->
+<!--                        <aside class="left_widgets p_filter_widgets">-->
+<!--                            <div class="l_w_title">-->
+<!--                                <h3>Фильтр</h3>-->
+<!--                            </div>-->
+
+<!--                            <div class="widgets_inner  ">-->
+<!--                                <ul class="list">-->
+<!--                                     {% if attributes %}-->
+<!--                                    <i><h5>Подкатегории</h5></i>-->
+<!--                                    <hr/>-->
+
+<!--                                        {% for item in attributes %}-->
+<!--                                     <li>-->
+<!--                                         <div  >-->
+<!--                                             <input type="radio" id="id_beatles_{{item.id}}" name = "subcategory"  value="{{item.id}}" onclick="this.form.submit()"/>-->
+<!--                                             <span >{{ item.name }} ( {{ item.product__count }} )</span>-->
+<!--                                         </div>-->
+<!--                                     </li>-->
+<!--                                        {% endfor %}-->
+<!--                                      {% endif %}-->
+<!--                                       {% if filters_higth %}-->
+<!--                                        <i><h5>Высота</h5></i>-->
+<!--                                          <hr/>-->
+<!--                                       {% endif %}-->
+<!--                                        {% for item in filters_higth %}-->
+<!--                                    <li>-->
+<!--                                         <div  >-->
+<!--                                             <input type="checkbox" id="id_beatles_{{item.id}}" name = "height"  value="{{item.name}}"  />-->
+<!--                                             <span >{{ item.name }} </span>-->
+<!--                                         </div>-->
+<!--                                     </li>-->
+<!--                                    <br/>-->
+<!--                                    {% endfor %}-->
+
+<!--                                       {% if filters_deep %}-->
+<!--                                        <i><h5>Глубина</h5></i>-->
+<!--                                          <hr/>-->
+<!--                                       {% endif %}-->
+<!--                                        {% for item in filters_deep %}-->
+<!--                                    <li>-->
+<!--                                         <div  >-->
+<!--                                             <input type="checkbox" id="id_beatles_{{item.id}}" name = "deep" value="{{item.name}}" />-->
+<!--                                             <span >{{ item.name }} </span>-->
+<!--                                         </div>-->
+<!--                                     </li>-->
+<!--                                    <br/>-->
+<!--                                    {% endfor %}-->
+
+<!--                                    {% if filters_width %}-->
+<!--                                        <i><h5>Ширина</h5></i>-->
+<!--                                          <hr/>-->
+<!--                                       {% endif %}-->
+<!--                                        {% for item in filters_width %}-->
+
+<!--                                    <li>-->
+<!--                                         <div  >-->
+<!--                                             <input type="checkbox" id="id_beatles_{{item.id}}" name = "width" value="{{item.name}}" />-->
+<!--                                             <span >{{ item.name }} </span>-->
+<!--                                         </div>-->
+<!--                                     </li>-->
+<!--                                    <br/>-->
+
+<!--                                        {% endfor %}-->
+<!--                                &lt;!&ndash; end attrebutes&ndash;&gt;-->
+<!--&lt;!&ndash;                                       {% for item in prods %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    {% if item.attributes %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <input type="radio" id="id_beatles_{{item.attributes}}" name = "subcategory"  value="{{item.attributes}}"/>&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                                   onclick="$(this).toggleClass('select')"&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;&lt;!&ndash;                                        required&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                              {{item.attributes}}&ndash;&gt;-->
+<!--&lt;!&ndash;                                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                       {% endif %}&ndash;&gt;-->
+<!--&lt;!&ndash;                                       {% endfor %}&ndash;&gt;-->
+
+<!--                                </ul>-->
+<!--                            </div>-->
+<!--                        </aside>-->
+<!--                            <button type="submit" class="btn_3">Поехали</button>-->
+<!--                        </form>-->
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu">
+                                    <p><span>( {{count}} )</span>  Продуктов найдено</p>
+                                </div>
+<!--                                    <form  id="sort" method="post" >{% csrf_token %}-->
+<!--                                        <div class="single_product_menu d-flex" >-->
+<!--                                          <h5>Сортировать : </h5>-->
+<!--                                            <select name="price" onchange="this.form.submit()">-->
+<!--                                             {% if sort == 'price' %}-->
+<!--                                               <option data-display="подешевле"></option>-->
+<!--                                             {% endif %}-->
+<!--                                             {% if sort == '-price' %}-->
+<!--                                               <option data-display="подороже"></option>-->
+<!--                                             {% endif %}-->
+<!--                                               <option data-display="Выбрать сортировку"></option>-->
+<!--                                               <option  value="price" > подешевле</option>-->
+<!--                                               <option  value="-price"> подороже</option>-->
+<!--                                            </select>-->
+<!--                                        </div>-->
+<!--                                    </form>-->
+<!--                                   <div class="single_product_menu d-flex">-->
+<!--                                      <div class="input-group">-->
+<!--                                              <input type="text" class="form-control" placeholder="Поиск"-->
+<!--                                               aria-describedby="inputGroupPrepend">-->
+<!--                                           <div class="input-group-prepend">-->
+<!--                                              <span class="input-group-text" id="inputGroupPrepend"><i-->
+<!--                                                    class="ti-search"></i></span>-->
+<!--                                           </div>-->
+<!--                                      </div>-->
+<!--                                  </div>-->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center latest_product_inner">
+                       {% if product %}
+                        {% for item in product %}
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <a href="/product/{{item.slug}}"><img src="/media/{{item.image}}" alt=""></a>
+                                <div class="single_product_text">
+                                    <h4>{{item.name}}</h4>
+                                    <h3>{{item.price }} грн.</h3>
+                                    <a href="/product/{{item.slug}}" class="add_cart">Смотреть<i class="ti-heart"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <div class="single_product_text">
+                                    <i><h3>К сожелению по вашему запросу {{q}} ничего не найдено!!!</h3></i>
+
+                                    <a href="/"><button type="submit" class="btn_3">Вернуться в магазин</button></a>
+                        </div>
+                        {% endif %}
+                        <div class="col-lg-12">
+                            <div class="pageination">
+<!--                                <nav aria-label="Page navigation example">-->
+<!--                                    <ul class="pagination justify-content-center">-->
+<!--                                        <li class="page-item">-->
+<!--                                            <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                                <i class="ti-angle-double-left"></i>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">4</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">5</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">6</a></li>-->
+<!--                                        <li class="page-item">-->
+<!--                                            <a class="page-link" href="#" aria-label="Next">-->
+<!--                                                <i class="ti-angle-double-right"></i>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                </nav>-->
+                                <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                                                   {% if product_page.has_previous %}
+                                                                       <li class="page-link"><a aria-label="Previous" href="?page={{ product_page.previous_page_number }}">
+                                                                           <i class="ti-angle-double-left"></i>
+                                                                       </a></li>
+                                                                   {% else %}
+                                                                       <li class="page-link">
+                                                                           <i class="ti-angle-double-left"></i>
+                                                                       </li>
+                                                                   {% endif %}
+                                                                   {% for page in product_page.paginator.page_range %}
+                                                                       {% if page == product_page.number %}
+                                                                           <li class="active"><span class="page-link" >{{ page }}<span class="sr-only">(current)</span></span></li>
+                                                                        {% else %}
+                                                                           <li ><a class="page-link" href="?page={{ page }}">{{ page }}</a> </li>
+                                                                       {% endif %}
+                                                                   {% endfor %}
+                                                                    {% if product_page.has_next %}
+                                                                         <li class="page-link"><a href="?page={{ product_page.next_page_number }}">
+                                                                             <i class="ti-angle-double-right"></i>
+                                                                         </a></li>
+                                                                    {% else %}
+                                                                       <li class="page-link" aria-label="Next"><span>
+                                                                           <i class="ti-angle-double-right"></i>
+                                                                       </span></li>
+                                                                    {% endif %}
+                                </ul>
+                                  </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+
+    <!-- product_list part start-->
+    <section class="product_list best_seller">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section_tittle text-center">
+                        <h2>Best Sellers <span>shop</span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-12">
+                    <div class="best_product_slider owl-carousel">
+                        <div class="single_product_item">
+                            <img src="{% static 'img/product/product_1.png' %}" alt="">
+                            <div class="single_product_text">
+                                <h4>Quartz Belt Watch</h4>
+                                <h3>$150.00</h3>
+                            </div>
+                        </div>
+                        <div class="single_product_item">
+                            <img src="{% static 'img/product/product_2.png' %}" alt="">
+                            <div class="single_product_text">
+                                <h4>Quartz Belt Watch</h4>
+                                <h3>$150.00</h3>
+                            </div>
+                        </div>
+                        <div class="single_product_item">
+                            <img src="{% static 'img/product/product_3.png' %}" alt="">
+                            <div class="single_product_text">
+                                <h4>Quartz Belt Watch</h4>
+                                <h3>$150.00</h3>
+                            </div>
+                        </div>
+                        <div class="single_product_item">
+                            <img src="{% static 'img/product/product_4.png' %}" alt="">
+                            <div class="single_product_text">
+                                <h4>Quartz Belt Watch</h4>
+                                <h3>$150.00</h3>
+                            </div>
+                        </div>
+                        <div class="single_product_item">
+                            <img src="{% static 'img/product/product_5.png' %}" alt="">
+                            <div class="single_product_text">
+                                <h4>Quartz Belt Watch</h4>
+                                <h3>$150.00</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

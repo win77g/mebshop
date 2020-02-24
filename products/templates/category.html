@@ -1,0 +1,303 @@
+
+{% extends 'base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+{% load extras %}
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->
+<!--<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
+
+<!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+<!--                            {{slug}}-->
+                            <i><h2>{{categorys.name}}</h2></i>
+                            <i><p><a href="/">Главная</a><span>/</span> {{categorys.name}}</p></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         <hr class="light_1"/>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding" style="margin-left:5px;margin-right:5px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="left_sidebar_area">
+
+<!--                        <aside class="left_widgets p_filter_widgets price_rangs_aside">-->
+<!--                            <div class="l_w_title">-->
+<!--                                <h3>Фильтр цены</h3>-->
+<!--                            </div>-->
+<!--                            <div class="widgets_inner">-->
+<!--                                <form action="/category/filter/" method="post" id="fillterPrice"> {% csrf_token %}-->
+<!--                                <div class="range_item">-->
+<!--                                     <div id="slider-range" ></div>-->
+<!--                                    <input type="text" class="js-range-slider"  />-->
+<!--                                    <div class="d-flex">-->
+<!--                                        <div class="price_text">-->
+<!--                                            <p>Цена :</p>-->
+<!--                                        </div>-->
+
+<!--                                        <div class="price_value d-flex justify-content-center">-->
+
+<!--                                                <input type="text" class="js-input-from"  value="{{min_p|floatformat}}" />-->
+<!--                                                   <span>до</span>-->
+<!--                                                <input type="text" class="js-input-to"  value="{{max_p|floatformat}}" />-->
+
+<!--                                        </div>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                  </form>-->
+<!--                            </div>-->
+<!--                        </aside>-->
+                        <form action="/category/filter/" id="fillterSubCategory" method="post" >{% csrf_token %}
+                        <aside class="left_widgets p_filter_widgets">
+                            <div class="l_w_title">
+                                {% if filters_width or filters_deep or filters_higth %}
+                                <h3>Фильтр</h3>
+                                {% endif %}
+                                {% if chaild %}
+                                <h3>Категории</h3>
+                                {% endif %}
+                            </div>
+
+                            <div class="widgets_inner  ">
+                                <ul class="list">
+
+<!--                                   new -->
+                                     {% for item in chaild %}
+                                     <li>
+                                         <div  >
+                                             <a href="/category/{{ item.slug }}/">{{ item.name }} </a>
+<!--                                             <span >{{ item.name }} ( {{ item.product__count }} )</span>-->
+                                         </div>
+                                     </li>
+                                        {% endfor %}
+<!--                                  new  -->
+                                       {% if filters_higth %}
+                                        <i><h5>Высота</h5></i>
+                                          <hr/>
+                                       {% endif %}
+                                        {% for item in filters_higth %}
+                                    <li>
+                                         <div  >
+                                             <input type="checkbox" id="id_beatles_{{item.id}}" name = "height"  value="{{item.id}}"  />
+                                             <span >{{ item.name }} </span>
+                                         </div>
+                                     </li>
+                                    <br/>
+                                    {% endfor %}
+
+                                       {% if filters_deep %}
+                                        <i><h5>Глубина</h5></i>
+                                          <hr/>
+                                       {% endif %}
+                                        {% for item in filters_deep %}
+                                    <li>
+                                         <div  >
+                                             <input type="checkbox" id="id_beatles_{{item.id}}" name = "deep" value="{{item.id}}" />
+                                             <span >{{ item.name }} </span>
+                                         </div>
+                                     </li>
+                                    <br/>
+                                    {% endfor %}
+
+                                    {% if filters_width %}
+                                        <i><h5>Ширина</h5></i>
+                                          <hr/>
+                                       {% endif %}
+                                        {% for item in filters_width %}
+
+                                    <li>
+                                         <div  >
+                                             <input type="checkbox" id="id_beatles_{{item.id}}" name = "width" value="{{item.id}}" />
+                                             <span >{{ item.name }} </span>
+                                         </div>
+                                     </li>
+                                    <br/>
+
+                                        {% endfor %}
+
+
+
+                                </ul>
+                            </div>
+                        </aside>
+                            {% if filters_width or filters_deep or filters_higth %}
+                            <button type="submit" class="btn_3">Поехали</button>
+                            {% endif %}
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="product_top_bar d-flex justify-content-between align-items-center">
+                                <div class="single_product_menu">
+                                    <p><span>( {{count}} )</span>  Продуктов найдено</p>
+                                </div>
+                                    <form  id="sort" method="post" >{% csrf_token %}
+                                        <div class="single_product_menu d-flex" >
+                                          <h5>Сортировать : </h5>
+                                            <select name="price" onchange="this.form.submit()">
+                                             {% if sort == 'price' %}
+                                               <option data-display="подешевле"></option>
+                                             {% endif %}
+                                             {% if sort == '-price' %}
+                                               <option data-display="подороже"></option>
+                                             {% endif %}
+                                               <option data-display="Выбрать сортировку"></option>
+                                               <option  value="price" > подешевле</option>
+                                               <option  value="-price"> подороже</option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                   <div class="single_product_menu d-flex">
+                                      <div class="input-group">
+                                              <input type="text" class="form-control" placeholder="Поиск"
+                                               aria-describedby="inputGroupPrepend">
+                                           <div class="input-group-prepend">
+                                              <span class="input-group-text" id="inputGroupPrepend"><i
+                                                    class="ti-search"></i></span>
+                                           </div>
+                                      </div>
+                                  </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row align-items-center latest_product_inner">
+
+                        {% for item in product_page %}
+                        <div class="col-lg-4 col-sm-6">
+                            <div class="single_product_item">
+                                <a href="/product/{{item.slug}}"><img src="/media/{{item.image}}" alt="" height="300" width="350"></a>
+                                <div class="single_product_text">
+                                    <h4>{{item.name}}</h4>
+                                    <h3>{{item.price }} грн.</h3>
+                                    <a href="/product/{{item.slug}}" class="add_cart">Смотреть</a>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="col-lg-12">
+                            <div class="pageination">
+<!--                                <nav aria-label="Page navigation example">-->
+<!--                                    <ul class="pagination justify-content-center">-->
+<!--                                        <li class="page-item">-->
+<!--                                            <a class="page-link" href="#" aria-label="Previous">-->
+<!--                                                <i class="ti-angle-double-left"></i>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">1</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">2</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">4</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">5</a></li>-->
+<!--                                        <li class="page-item"><a class="page-link" href="#">6</a></li>-->
+<!--                                        <li class="page-item">-->
+<!--                                            <a class="page-link" href="#" aria-label="Next">-->
+<!--                                                <i class="ti-angle-double-right"></i>-->
+<!--                                            </a>-->
+<!--                                        </li>-->
+<!--                                    </ul>-->
+<!--                                </nav>-->
+                                <nav aria-label="Page navigation example">
+                                <ul class="pagination justify-content-center">
+                                                                   {% if product_page.has_previous %}
+                                                                       <li class="page-link"><a aria-label="Previous" href="?page={{ product_page.previous_page_number }}">
+                                                                           <i class="ti-angle-double-left"></i>
+                                                                       </a></li>
+                                                                   {% else %}
+                                                                       <li class="page-link">
+                                                                           <i class="ti-angle-double-left"></i>
+                                                                       </li>
+                                                                   {% endif %}
+                                                                   {% for page in product_page.paginator.page_range %}
+                                                                       {% if page == product_page.number %}
+                                                                           <li class="active"><span class="page-link" >{{ page }}<span class="sr-only">(current)</span></span></li>
+                                                                        {% else %}
+                                                                           <li ><a class="page-link" href="?page={{ page }}">{{ page }}</a> </li>
+                                                                       {% endif %}
+                                                                   {% endfor %}
+                                                                    {% if product_page.has_next %}
+                                                                         <li class="page-link"><a href="?page={{ product_page.next_page_number }}">
+                                                                             <i class="ti-angle-double-right"></i>
+                                                                         </a></li>
+                                                                    {% else %}
+                                                                       <li class="page-link" aria-label="Next"><span>
+                                                                           <i class="ti-angle-double-right"></i>
+                                                                       </span></li>
+                                                                    {% endif %}
+                                </ul>
+                                  </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                     <div class="col-lg-12" style='background-color:#F0FFF0'>
+                       <div>
+                        <h4>{{categorys.description|safe}}</h4>
+                       </div>
+                     </div>
+                    <hr>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+    <!--================ description category =====================-->
+<!--    <section>-->
+<!--        <div class="container">-->
+<!--            <div class="col-lg-12">-->
+<!--                <div>-->
+<!--                        <h4>{{categorys.description|safe}}</h4>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </section>-->
+    <!--================ end description category =================-->
+    <br/>
+    <!-- product_list part start -->
+       <!-- product_list part start-->
+    <section class="product_list best_seller section_padding" style="margin-left:15px;margin-right:15px;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="section_tittle text-center">
+                        <h2>Лучшая продажа <span></span></h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-12">
+                    <div class="best_product_slider owl-carousel">
+                        {% for item in slider_top %}
+                        <div class="single_product_item">
+                            <a href="/product/{{ item.slug }}"><img src="/media/{{ item.image }}" width="200" height="250" alt=""></a>
+                            <div class="single_product_text">
+                                <h4>{{ item.name }}</h4>
+                                <h3>{{ item.price }}</h3>
+                                <a href="/product/{{ item.slug }}"><h3>Перейти</h3></a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details">
+
+            <h4>Ваш счёт:</h4>
+
+            <ul>
+
+              <li>
+                <p>Счёт №</p><span>: {{ phone}}</span>
+              </li>
+              <li>
+                <p>дата</p><span>: {{ item.created}}</span>
+              </li>
+              <li>
+                <p>к оплате</p><span>: {{item.total_price}} грн.</span>
+              </li>
+              <li>
+                <p>способ опаты</p><span>: наличман(в натуре :))</span>
+              </li>
+            </ul>
+
+          </div>
+        </div>
+</body>
+</html>

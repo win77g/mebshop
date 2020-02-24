@@ -1,0 +1,437 @@
+{% load staticfiles %}
+{% load  mptt_tags %}
+<header class="main_menu home_menu">
+    <div class="container-fluid ">
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" href="/"> <img src="{% static 'img/logo.png' %}" alt="logo"> </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse main-menu-item hidden-xs-sm " id="navbarSupportedContent">
+                        <ul class="navbar-nav ax">
+                            <li class="nav-item">
+                                <a class="nav-link" href="index.html">Киевстар +380977777777</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="index.html">Лайф +380777777777</a>
+
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="index.html">Мтс +380777777777</a>
+
+                            </li>
+                            <li class="nav-item ">
+
+                            <a class="nav-link" href="index.html">пн.-сб. 9.00 - 18.00</a>
+                            </li>
+
+                        </ul>
+                    </div>
+                    <div class="hearer_icon d-flex">
+                        <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                        <!--<a href=""><i class="ti-heart"></i></a>-->
+                        <div class="">
+                          <a class="" href="/cart/">
+                              <i class="fas fa-cart-plus">
+                                <span id="top_cart_price">
+                                  <!-- данные из контекст процессора -->
+                                        {{cart_total_price}}
+                                </span>
+                                <span id="basket_total_nmb">
+                                        ({{cart_nmb}})
+                                </span>
+
+                              </i>
+                          </a>
+                            <!-- <a class="dropdown-toggle" href="/cart/" id="navbarDropdown3" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-cart-plus"></i>
+                            </a> -->
+                            <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="single_product">
+
+                                </div>
+                            </div> -->
+
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <hr class="light"/>
+        <div class="row align-items-center">
+            <div class="col-lg-12">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <!-- <a class="navbar-brand" href="index.html"> <img src="{% static 'img/logo.png' %}" alt="logo"> </a> -->
+                    <!-- <button class="navbar-toggler" type="button" data-toggle="collapse"
+                        data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                    </button> -->
+
+                    <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                        <ul class="navbar-nav top-menu">
+                            <li class="nav-item"><a class="nav-link" href="/">Главная</a>
+
+                            </li>
+<!--{% recursetree category %}-->
+<!--                            <li class="nav-item ">-->
+
+<!--                                <a class="nav-link " href="/category/{{ node.slug}}/">-->
+<!--                                    {{ node.name }}-->
+<!--                                </a>-->
+<!--                                 {% if not node.is_leaf_node %}-->
+<!--                                 <ul class="dropdown-menu" >-->
+<!--&lt;!&ndash;                                <ul class="dropdown" >&ndash;&gt;-->
+<!--                                    <a class="dropdown-item" href="category.html">{{ children }} </a>-->
+<!--                                </ul>-->
+<!--                                {% endif %}-->
+<!--                            </li>-->
+<!--                            &lt;!&ndash; <li class="nav-item">-->
+<!--                                <a class="nav-link" href="contact.html">{{ node.name }}</a>-->
+<!--                            </li> &ndash;&gt;-->
+<!-- {% endrecursetree  %}-->
+<!--                            {% recursetree category %}-->
+<!--                              <li class="dropdown"><a class="nav-link " href="/category/{{ node.slug}}/">{{ node.name }}</a>-->
+
+<!--                              </li>-->
+<!--                            {% endrecursetree  %}-->
+                           <!--Шлафы-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/Shkafi/">Шкафы-купе</a>
+
+                            </li>
+                            <!--Шкафы end -->
+                            <!-- Кухни-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/kuhni-mebel-dlya-kuhni/">Кухни</a>
+                                <ul class="submenu">
+        <li><h3>Кухни</h3>
+          <ul class="effect4">
+            <li><a href="/category/kuhni-standartnye/">Кухни стандартные</a></li>
+            <li><a href="/category/kuhni-modulnyenestandartnye/">Кухни модульные(не стандарт)</a></li>
+            <li><a href="/category/kuhonnye-ugolki/">Кухонные уголки</a></li>
+            <li><a href="/category/stolykuhnya/">Столы(кухня)</a></li>
+            <li><a href="/category/stulyakuhnya/">Стулья(кухня)</a></li>
+            <li><a href="/category/taburetki/">Табуретки</a></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--Кухни end -->
+
+                         <!--гостиные -->
+                             <li class="nav-item"><a class="nav-link" href="/category/Gostinie/">Гостиные</a>
+                                <ul class="submenu">
+
+        <li><h3>Гостиные</h3>
+          <ul>
+            <li><a href="/category/zhurnalnye-stoliki/">Журнальные столики</a></li>
+            <li><a href="/category/tv-tumby/">TV-тумбы</a></li>
+            <li><a href="/category/modulnye-stenki/">Модульные стенки</a></li>
+            <li><a href="/category/stenkigostinye/">Стенки(гостиные)</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--гостиные end -->
+                            <!-- Прихожие-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/Prihojie/">Прихожие</a>
+                                <ul class="submenu">
+        <li><h3>Прихожие</h3>
+          <ul>
+            <li><a href="/category/prihozhie-standartnye/">Прихожие стандартные</a></li>
+            <li><a href="/category/prihozhie-modulnye/">Прихожие модульные</a></li>
+            <li><a href="/category/tumby-dlya-obuvi/">Тумбы для обуви</a></li>
+            <li><a href="/category/veshalki/">Вешалки</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--Прихожие end -->
+                            <!-- Спальни-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/Spalni/">Спальни</a>
+                                <ul class="submenu">
+        <li><h3>Спальни</h3>
+          <ul>
+            <li><a href="/category/spalnye-garnitury/">Спальные гарнитуры</a></li>
+            <li><a href="/category/spalni-modulnye/">Спальни модульные</a></li>
+            <li><a href="/category/lameli-i-karkasy/">Ламели и каркасы</a></li>
+            <li><a href="/category/Krovati/">Кровати</a></li>
+            <li><a href="/category/matrasy/">Матрасы</a></li>
+            <li><a href="/category/Komodi/">Комоды</a></li>
+            <li><a href="/category/tualetnyj-stolik/">Туалетные столики</a></li>
+            <li><a href="/category/shkafy-v-spalnyu/">Шкафы(спальня)</a></li>
+            <li><a href="/category/tumby-prikrovatnye/">Тумбы прикроватные</a></li>
+            <li><a href="/category/zerkalo-v-spalnyu/">Зеркало в спалню</a></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--Спальни end -->
+                                 <!-- detscie-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/Detskie/">Детские</a>
+                                <ul class="submenu">
+        <li><h3>Детские</h3>
+          <ul>
+            <li><a href="/category/detskaya-modulnaya-mebel/">Детская модульная мебель</a></li>
+            <li><a href="/category/dvuhyarusnye-krovati/">Двухярусные кровати</a></li>
+            <li><a href="/category/krovatki-dlya-novorozhdennyh/">Кроватки для новорожденных</a></li>
+            <li><a href="/category/komody-pelenatory/">Комоды пелинальные</a></li>
+            <li><a href="/category/matrasy-detskie/">Матрасы детские</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--detscie end -->
+                                          <!-- Офис-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/Komodi/">Офис</a>
+                                <ul class="submenu">
+        <li><h3>Офис</h3>
+          <ul>
+            <li><a href="">Элемент списка</a></li>
+            <li><a href="">Элемент списка</a></li>
+            <li><a href="">Элемент списка</a></li>
+            <li><a href="">Элемент списка</a></li>
+            <li><a href="">Элемент списка</a></li>
+            <li><a href="">Элемент списка</a></li>
+            <li><a href="">Элемент списка</a></li>
+            <li><a href="">Элемент списка</a></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--Офис end -->
+                            <!-- деревянная мебель-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/derevyannaya-mebel/">Деревянная мебель</a>
+                                <ul class="submenu">
+        <li><h3>Деревянная мебель</h3>
+          <ul>
+            <li><a href="/category/krovati-i-prikrovatnye-tumby/">Кровати и прикроватные тумбы</a></li>
+            <li><a href="/category/komodyderevyannaya-mebel/">Комоды деревянные</a></li>
+            <li><a href="/category/stolyderevyannaya-mebel/">Столы деревянные</a></li>
+            <li><a href="/category/stulyaderevyannaya-mebel/">Стулья деревянные</a></li>
+            <li><a href="/category/kuhonnye-ugolkiderevyannaya-mebel/">Кухонные уголки </a></li>
+            <li><a href="/category/kuhnifasad-derevo/">Кухни (фасад дерево)</a></li>
+
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--Кровати end -->
+
+
+
+                            <!-- Столы-->
+                                 <li class="nav-item"><a class="nav-link" href="/category/myagkaya-mebel/">Мягкая мебель</a>
+                                <ul class="submenu">
+        <li><h3>Мягкая мебель</h3>
+          <ul>
+            <li><a href="/category/uglovye-divany/">Угловые диваны</a></li>
+            <li><a href="/category/myagkie-krovati/">Мягкие кровати</a></li>
+            <li><a href="/category/kresla/">Кресла</a></li>
+            <li><a href="/category/divany/">Диваны</a></li>
+            <li><a href="/category/detskie-divany/">Детские диваны</a></li>
+            <li><a href="/category/pufiki/">Пуфики</a></li>
+
+
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+        <li>
+          <ul>
+            <li>
+              <a href="" class="link-image">
+              <img src="/media/shkaf/shkaf.jpg">
+              </a>
+            </li>
+            <li><h3 class="image-header">Заголовок</h3></li>
+          </ul>
+        </li>
+      </ul>
+                            </li>
+                            <!--Столы end -->
+                             <li class="nav-item">
+                                <a class="nav-link" href="/underorder/">Мебель на заказ</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="/delivery/">Доставка</a>
+                            </li>
+                             <li class="nav-item">
+                                <a class="nav-link" href="/contact/">Контакты</a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+
+                </nav>
+            </div>
+        </div>
+    </div>
+     <div class="search_input" id="search_input_box">
+        <div class="container ">
+            <form class="d-flex justify-content-between search-inner" action="/homepage/search/" method="post">{% csrf_token %}
+                <input name="q" type="text" class="form-control" id="search_input" placeholder="Поиск...">
+                <button type="submit" class="btn"></button>
+                <span class="ti-close" id="close_search" title="Close Search"></span>
+            </form>
+        </div>
+    </div>
+</header>
